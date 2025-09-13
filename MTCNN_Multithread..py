@@ -32,49 +32,57 @@ def face_detection():
                 faces=results
 
 
-camera=cv2.VideoCapture(0)
 
-thread=threading.Thread(target=face_detection,daemon=True)
-thread.start()
+detection_thread=threading.Thread(target=face_detection,daemon=True)
+detection_thread.start()
 
 frame_count=0
 start_time=time.time()
 
+def read_display():
+    global faces,latest_frame,frame_count,start_time
+    camera=cv2.VideoCapture(0)
 
-while True:
-    success,frame=camera.read()
-    if not success:
-        break
+    while True:
+        success,frame=camera.read()
+        if not success:
+            break
 
-    latest_frame=frame
-
-
-    with lock:
-        for face in faces:
-            x,y,w,h=face['box']
-            confidence=face['confidence']
-            keypoints=face['keypoints']
+        latest_frame=frame
 
 
-            cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
+        with lock:
+            for face in faces:
+                x,y,w,h=face['box']
+                confidence=face['confidence']
+                keypoints=face['keypoints']
 
-            for point in keypoints.values():
-                cv2.circle(frame,point,2,(0,255,0),-1)
+
+                cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
+
+                for point in keypoints.values():
+                    cv2.circle(frame,point,2,(0,255,0),-1)
             
-            cv2.putText(frame,f"Confidence:{confidence:.2f}",(x,y-5),cv2.FONT_HERSHEY_SIMPLEX,.6,(255,0,0),2)
+                cv2.putText(frame,f"Confidence:{confidence:.2f}",(x,y-5),cv2.FONT_HERSHEY_SIMPLEX,.6,(255,0,0),2)
     
-    frame_count+=1
-    elapsed_time=time.time()-start_time
-    fps=frame_count/elapsed_time
-    cv2.putText(frame,f"FPS:{fps:.2f}",(20,40),cv2.FONT_HERSHEY_SIMPLEX,.8,(0,0,255),2)
+        frame_count+=1
+        elapsed_time=time.time()-start_time
+        fps=frame_count/elapsed_time
+        cv2.putText(frame,f"FPS:{fps:.2f}",(20,40),cv2.FONT_HERSHEY_SIMPLEX,.8,(0,0,255),2)
 
-    cv2.imshow("Survillance Security System(Face Detector)",frame)
+        cv2.imshow("Survillance Security System(Face Detector)",frame)
 
-    if cv2.waitKey(1) &0xFF==ord('q'):
-        print("Closing the program")
-        break
+        if cv2.waitKey(1) &0xFF==ord('q'):
+            print("Closing the program")
+            break
 
+    camera.release()
+
+read_display_thread=threading.Thread(target=read_display,daemon=True)
+read_display_thread.start()
+read_display_thread.join()
 thread_stop_flag=True
-thread.join() #waits for the thread to finish the its blocks execution
-camera.release()
+detection_thread.join() #waits for the thread to finish the its blocks execution
+
+
 cv2.destroyAllWindows()           
