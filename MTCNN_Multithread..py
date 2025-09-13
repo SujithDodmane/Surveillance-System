@@ -33,14 +33,14 @@ def face_detection():
 
 
 
-detection_thread=threading.Thread(target=face_detection,daemon=True)
-detection_thread.start()
+
+
 
 frame_count=0
 start_time=time.time()
 
 def read_display():
-    global faces,latest_frame,frame_count,start_time
+    global faces,latest_frame,frame_count,start_time,thread_stop_flag
     camera=cv2.VideoCapture(0)
 
     while True:
@@ -74,14 +74,19 @@ def read_display():
 
         if cv2.waitKey(1) &0xFF==ord('q'):
             print("Closing the program")
+            thread_stop_flag=True # Stops the detection as soon as reading stops
             break
 
     camera.release()
 
+    
+detection_thread=threading.Thread(target=face_detection,daemon=True)
 read_display_thread=threading.Thread(target=read_display,daemon=True)
+
+
+detection_thread.start()
 read_display_thread.start()
 read_display_thread.join()
-thread_stop_flag=True
 detection_thread.join() #waits for the thread to finish the its blocks execution
 
 
