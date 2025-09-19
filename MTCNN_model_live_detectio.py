@@ -3,14 +3,14 @@ from mtcnn import MTCNN
 
 detector=MTCNN()
 
-camera=cv2.VideoCapture(0)
+camera=cv2.VideoCapture("rtsp://admin:dodmane%407854@192.168.0.104:554/cam/realmonitor?channel=2&subtype=0")
 
 while True:
     success,frame_1=camera.read()
     if not success:
         break
-    #frame=cv2.resize(frame_1,(1440,820))
-    frame=frame_1
+    frame=cv2.resize(frame_1,(1440,820))
+    # frame=frame_1
     frame_rgb=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
 
     faces=detector.detect_faces(frame_rgb)

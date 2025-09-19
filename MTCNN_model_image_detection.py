@@ -3,7 +3,7 @@ from mtcnn import MTCNN
 
 detector=MTCNN()
 
-img=cv2.imread("D:\Projects\Surveillance\openCV\Detection_Models\Python Scripts\IMG_1641.jpg")
+img=cv2.imread("D:\Projects\Surveillance-System\IMG_1641.jpg")
 # h,w=img.shape[:2]
 resized=cv2.resize(img,(1920,1080))
 
