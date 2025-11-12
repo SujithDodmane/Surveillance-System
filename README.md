@@ -21,24 +21,23 @@ The system ensures smooth real-time performance through multithreading for detec
 
 ## 🧩 Folder Overview
 
+```
 Surveillance-System/
 │
-├── cctv_core/ # ✅ Main folder containing final working modular code
-│ ├── main.py
-│ ├── detection.py
-│ ├── recognition.py
-│ ├── display.py
-│ ├── embeddings_manager.py
-│ ├── state.py
-│ ├── requirements.txt
-│ └── README.md # (optional subfolder README)
+├── cctv_core/                 # ✅ Main folder containing final working modular code
+│   ├── main.py
+│   ├── detection.py
+│   ├── recognition.py
+│   ├── display.py
+│   ├── embeddings_manager.py
+│   ├── state.py
+│   ├── requirements.txt
+│   └── README.md              # (optional subfolder README)
 │
 ├── .gitignore
-├── README.md # (this file)
+├── README.md                  # (this file)
 └── Other folders (legacy/test builds for development reference)
-
-yaml
-Copy code
+```
 
 > ⚙️ The **`cctv_core`** folder contains the complete and final working code.  
 > Other folders (like `Face_recognition/` or `GUI_enabled/`) are early experiments or testing builds preserved for development history.
@@ -51,89 +50,110 @@ Copy code
 ```bash
 git clone https://github.com/SujithDodmane/Surveillance-System.git
 cd Surveillance-System/cctv_core
-2️⃣ Create and activate a virtual environment
-bash
-Copy code
+```
+
+### 2️⃣ Create and activate a virtual environment
+```bash
 python -m venv venv
 venv\Scripts\activate       # For Windows
 # OR
 source venv/bin/activate    # For Linux / macOS
-3️⃣ Install dependencies
-bash
-Copy code
+```
+
+### 3️⃣ Install dependencies
+```bash
 pip install -r requirements.txt
-📦 requirements.txt
+```
+
+---
+
+## 📦 requirements.txt
+
 Exact versions tested and verified with this project:
 
-ini
-Copy code
-torch==2.1.2
-torchvision==0.16.2
-facenet-pytorch==2.5.3
+```
+torch==2.2.1+cu121
+torchvision==0.17.1+cu121
+facenet-pytorch==2.6.0
 opencv-python==4.10.0.84
-numpy==1.26.4
-pillow==10.3.0
-⚙️ Note:
+numpy==1.26.0
+pillow==10.2.0
+```
 
-Works seamlessly on both CPU and GPU (auto-detection).
+> ⚙️ **Note:**  
+> - Works seamlessly on both **CPU** and **GPU (CUDA 12.1)**.  
+> - For GPU acceleration, install CUDA-enabled PyTorch from [pytorch.org](https://pytorch.org/get-started/locally/).
 
-For GPU acceleration, install CUDA-enabled PyTorch from pytorch.org.
+---
 
-▶️ Running the Program
-From inside the cctv_core folder, run:
+## ▶️ Running the Program
 
-bash
-Copy code
+From inside the `cctv_core` folder, run:
+
+```bash
 python main.py
-The webcam feed will open automatically.
+```
+
+The webcam feed will open automatically.  
 The system will detect and recognize faces in real-time while showing FPS, confidence, and similarity scores.
 
-🔘 Keyboard Controls
-Key	Function
-E	Register a new face embedding (ensure only one face is visible)
-S	Save current embeddings to face_embeddings_3.pkl
-Q	Quit the program safely
+---
 
-🧠 Technical Overview
-MTCNN: Detects faces and keypoints (eyes, nose, mouth).
+## 🔘 Keyboard Controls
 
-InceptionResnetV1 (FaceNet): Generates 512D embeddings for face comparison.
+| Key | Function |
+|-----|-----------|
+| **E** | Register a new face embedding (ensure only one face is visible) |
+| **S** | Save current embeddings to `face_embeddings_3.pkl` |
+| **Q** | Quit the program safely |
 
-Threading: Four concurrent threads — for detection, recognition, embedding comparison, and display — enable real-time operation.
+---
 
-Embeddings File: Stores recognized faces’ features (.pkl) for persistent use across sessions.
+## 🧠 Technical Overview
 
-🧪 Tested Environment
-Component	Version
-Python	3.10
-OS	Windows 11 / Linux Ubuntu 22.04
-CUDA (optional)	12.1
-Torch Device	Auto-detects GPU (CUDA) or CPU
+- **MTCNN:** Detects faces and keypoints (eyes, nose, mouth).  
+- **InceptionResnetV1 (FaceNet):** Generates 512D embeddings for face comparison.  
+- **Threading:** Four concurrent threads — for detection, recognition, embedding comparison, and display — enable real-time operation.  
+- **Embeddings File:** Stores recognized faces’ features (`.pkl`) for persistent use across sessions.  
 
-⚡ Performance Tips
-Lower the frame resolution (e.g., 960x540) for higher FPS.
+---
 
-Use a GPU for faster embedding computation.
+## 🧪 Tested Environment
 
-Ensure consistent lighting for accurate detection.
+| Component | Version |
+|------------|----------|
+| **Python** | 3.10 |
+| **OS** | Windows 11 / Linux Ubuntu 22.04 |
+| **CUDA (optional)** | 12.1 |
+| **Torch Device** | Auto-detects GPU (CUDA) or CPU |
 
-Close background apps using the webcam to prevent frame drops.
+---
 
-🔮 Future Enhancements
-🔔 Mobile notifications for unknown face detection.
+## ⚡ Performance Tips
 
-🌐 Web-based dashboard for remote viewing.
+- Lower the frame resolution (e.g., `960x540`) for higher FPS.  
+- Use a GPU for faster embedding computation.  
+- Ensure consistent lighting for accurate detection.  
+- Close background apps using the webcam to prevent frame drops.
 
-📸 Multi-camera support for large-scale surveillance.
+---
 
-🧾 Attendance & access control integration.
+## 🔮 Future Enhancements
 
-👨‍💻 Author
-Sujith D K
-B.E. Computer Science and Engineering
+- 🔔 Mobile notifications for unknown face detection.  
+- 🌐 Web-based dashboard for remote viewing.  
+- 📸 Multi-camera support for large-scale surveillance.  
+- 🧾 Attendance & access control integration.
+
+---
+
+## 👨‍💻 Author
+
+**Sujith D K**  
+B.E. Computer Science and Engineering  
 R V College of Engineering (RVCE)
 
+---
 
-
-📌 Repository Link
-🔗 GitHub - SujithDodmane / Surveillance-System
+### 📌 Repository Link
+🔗 [GitHub - SujithDodmane / Surveillance-System](https://github.com/SujithDodmane/Surveillance-System)
