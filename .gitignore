@@ -1,0 +1,27 @@
+# Ignore compiled files and temporary caches
+__pycache__/
+*.pyc
+*.pyo
+*.log
+*.tmp
+
+# Ignore model & embedding files
+*.pkl
+
+# Ignore images and test media
+*.jpg
+*.png
+
+# Ignore VS Code workspace settings
+.vscode/
+*.code-workspace
+
+# Ignore test or experimental folders
+Face_recognition/
+GUI_enabled/
+
+# Keep these
+!.gitignore
+!Modularised/
+!README.md
+!requirements.txt

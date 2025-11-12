@@ -11,7 +11,7 @@ print(f"Using device: {device}")
 mtcnn = MTCNN(keep_all=True, device=device)
 
 # Open RTSP camera
-camera = cv2.VideoCapture("rtsp://admin:dodmane%407854@192.168.0.110:554/cam/realmonitor?channel=2&subtype=0")
+camera = cv2.VideoCapture(0)
 
 prev_time = 0
 

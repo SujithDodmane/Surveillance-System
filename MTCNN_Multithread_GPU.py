@@ -115,6 +115,9 @@ read_display_thread=threading.Thread(target=read_display,daemon=True)
 
 detection_thread.start()
 read_display_thread.start()
+
+
+
 read_display_thread.join()
 detection_thread.join() #waits for the thread to finish the its blocks execution
 
