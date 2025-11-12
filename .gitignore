@@ -12,13 +12,19 @@ __pycache__/
 *.jpg
 *.png
 
-# Ignore VS Code workspace settings
+# Ignore VS Code workspace files
 .vscode/
 *.code-workspace
 
 # Ignore test or experimental folders
 Face_recognition/
 GUI_enabled/
+MTCNN_Multithread.py
+MTCNN_Multithread_GPU.py
+MTCNN_Multithread and multiprocessing.py
+MTCNN_model_image_detection.py
+MTCNN_model_live_detectio.py
+check.py
 
 # Keep these
 !.gitignore
