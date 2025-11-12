@@ -1,6 +1,6 @@
 # detection.py
 # Thread----> For detection 
-# Uses state.latest_frame and writes to state.faces
+
 
 import cv2
 from facenet_pytorch import MTCNN
@@ -14,7 +14,7 @@ def face_detection(detector):
             try:
                 frame_copy = state.latest_frame.copy()
             except Exception:
-                # frame may be invalid temporarily
+
                 continue
 
             frame_rgb = cv2.cvtColor(frame_copy, cv2.COLOR_BGR2RGB)
@@ -27,7 +27,6 @@ def face_detection(detector):
 
             #without lock kooda kelsa agutte but one thread run agbeekadre innaondu thread i.e loop inda faces list corrupt aagbardu anta lock use madbeku
             with state.lock:
-                # use clear() to keep same list object
                 state.faces.clear()
                 if boxes is not None:
                     for i, box in enumerate(boxes):

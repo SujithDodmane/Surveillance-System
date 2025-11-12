@@ -1,5 +1,4 @@
 # state.py
-# Shared global state (mirrors the globals from your single-file script)
 
 import threading
 
@@ -7,7 +6,7 @@ import threading
 faces = []
 faces_img = []
 faces_img_rgb = []
-known_face_embeddings = {}   # will be initialized by main.py using load_embeddings
+known_face_embeddings = {}   # load_embeddings from already stored embeddings locally
 face_results = {}
 latest_frame = None
 thread_stop_flag = False

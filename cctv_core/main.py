@@ -1,5 +1,4 @@
 # main.py
-# Entry point - initialize models, load embeddings, start threads
 
 import cv2
 import torch
@@ -14,7 +13,8 @@ from recognition import Face_Recognition, init_models
 from display import read_display
 
 #Detecting device if GPU available or not
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')  #torch.device('cuda') ---> operation happens on GPU  #torch.device('cpu') ---> operation happens on CPU
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')  
+#torch.device('cuda') ---> operation happens on GPU  #torch.device('cpu') ---> operation happens on CPU
 
 #Initializing the detector 
 detector = MTCNN(keep_all=True, device=device)
@@ -33,7 +33,7 @@ read_display_thread = threading.Thread(target=read_display, args=(recognizer, de
 recognition_thread = threading.Thread(target=Face_Recognition.face_recognition, daemon=True)
 embedding_compare_thread = threading.Thread(target=Face_Recognition.extract_embeddings_compare, daemon=True)
 
-# 🧠 Note: starting threads together ensures concurrent real-time performance.
+
 detection_thread.start()
 read_display_thread.start()
 recognition_thread.start()

@@ -1,5 +1,5 @@
 # embeddings_manager.py
-# Loading, saving and registering embeddings (same functionality as single-file)
+# Loading, saving and registering embeddings
 
 import os
 import pickle

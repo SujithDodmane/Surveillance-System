@@ -1,6 +1,6 @@
 # display.py
 # Loop----> For reading and displaying the frames
-# Handles main camera reading, drawing boxes, displaying FPS, and key bindings (E, S, Q)
+
 
 import cv2
 import time
@@ -18,7 +18,7 @@ def read_display(recognizer, device):
             break
 
         frame = cv2.resize(frame, (1440, 820))
-        # update the shared latest_frame
+
         state.latest_frame = frame.copy()
 
         #without lock kooda kelsa agutte but one thread run agbeekadre innaondu thread i.e loop inda faces list corrupt aagbardu anta lock use madbeku
@@ -53,10 +53,8 @@ def read_display(recognizer, device):
         cv2.imshow("Survillance Security System(Face Detector)", frame)
 
         key = cv2.waitKey(1) & 0xFF
-        # set shared key so other threads can read it (Face_Recognition checks state.key)
         state.key = key
 
-        # Key bindings (Keyboard actions)
         if key == ord('e'):
             #only one face should be there while registering the embeddings
             if len(state.faces_img_rgb) == 1:

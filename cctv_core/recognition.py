@@ -11,7 +11,7 @@ import pickle
 import os
 from embeddings_manager import register_embedding, save_embeddings
 
-# module-level models will be set by main before starting threads
+
 recognizer = None
 device = None
 
@@ -22,7 +22,7 @@ def init_models(_recognizer, _device):
 
 class Face_Recognition:
     @staticmethod
-    def face_recognition(): # Detects faces and appends rgb version of each faces to faces_img_rgb
+    def face_recognition(): 
         global recognizer, device
         while not state.thread_stop_flag:
             if state.latest_frame is not None:
@@ -45,7 +45,7 @@ class Face_Recognition:
                             state.faces_img_rgb.append(face_cropped_rgb)
 
                             if state.key == ord('e'):
-                                # keep your name or dynamic naming as you want
+                                # keeping the name or dynamic naming as we want
                                 Face_Recognition.register_embeddings(face_cropped_rgb, 'Sujith')
                                 print("Face_Embedding_Function called")
                             elif state.key == ord('s'):
@@ -80,7 +80,6 @@ class Face_Recognition:
                     continue
 
                 with state.lock:
-                    # iterate over current face crops and compare
                     for i, (face_rgb, face) in enumerate(zip(state.faces_img_rgb, state.faces)):
                         try:
                             face_resized = cv2.resize(face_rgb, (160, 160))
@@ -114,7 +113,7 @@ class Face_Recognition:
                 if torch.is_tensor(e):
                     clean_data[name].append(e.detach().cpu().numpy())
                 else:
-                    clean_data[name].append(e)  # already numpy, just append
+                    clean_data[name].append(e)  
 
         if os.path.exists(file_path):
             with open(file_path, "rb") as f:
