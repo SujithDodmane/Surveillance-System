@@ -1,0 +1,28 @@
+# ===============================
+# Smart CCTV Surveillance System
+# Author: Sujith D K
+# R V College of Engineering (RVCE)
+# ===============================
+# Verified clean dependencies for:
+# - Face Detection (MTCNN)
+# - Face Recognition (InceptionResnetV1)
+# - Multithreaded CCTV Surveillance System
+# ===============================
+
+# Deep learning framework used by FaceNet and MTCNN models
+torch==2.2.1+cu121
+
+# Companion library for Torch - required by facenet-pytorch
+torchvision==0.17.1+cu121
+
+# Pretrained models (MTCNN + InceptionResnetV1)
+facenet-pytorch==2.6.0
+
+# OpenCV - used for real-time video capture, drawing, and frame processing
+opencv-python==4.10.0.84
+
+# Numerical operations and array manipulation
+numpy==1.26.0
+
+# Image handling - used internally by facenet and OpenCV for image conversion
+pillow==10.2.0

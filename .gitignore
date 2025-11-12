@@ -28,6 +28,6 @@ check.py
 
 # Keep these
 !.gitignore
-!Modularised/
+!cctv_core/
 !README.md
 !requirements.txt
