@@ -48,9 +48,7 @@ class Face_Recognition:
     #only one face should be there while registering the embeddings
     def register_embeddings(face_rgb, current_name):
         global recognizer, device
-        from display import embedding_preview
-        state.embedding_preview=face_rgb.copy()
-        embedding_preview()
+        state.embedding_preview=face_rgb.copy() # For previewing the embedding after pressing 'e'
 
         face_resized = cv2.resize(face_rgb, (160, 160))
         face_tensor = torch.tensor(face_resized).permute(2, 0, 1).unsqueeze(0).float() / 255.0

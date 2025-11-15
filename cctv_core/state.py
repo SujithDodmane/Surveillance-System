@@ -10,5 +10,4 @@ latest_frame = None
 thread_stop_flag = False
 lock = threading.Lock()
 key = None
-
 embedding_preview=None
