@@ -1,6 +1,5 @@
 # recognition.py
 # Face recognition and embedding comparison threads
-# Keeps original logic: crops faces, computes embeddings, compares with known embeddings
 # Checks state.key for 'e' and 's' as in your working file
 
 import cv2
@@ -9,7 +8,8 @@ import torch.nn.functional as F
 import state
 import pickle
 import os
-from embeddings_manager import register_embedding, save_embeddings
+from embeddings_manager import save_embeddings
+
 
 
 recognizer = None
@@ -44,18 +44,13 @@ class Face_Recognition:
                             state.faces_img.append(face_cropped)
                             state.faces_img_rgb.append(face_cropped_rgb)
 
-                            if state.key == ord('e'):
-                                # keeping the name or dynamic naming as we want
-                                Face_Recognition.register_embeddings(face_cropped_rgb, 'Sujith')
-                                print("Face_Embedding_Function called")
-                            elif state.key == ord('s'):
-                                Face_Recognition.save_embeddings(file_path="face_embeddings_3.pkl")
 
     #only one face should be there while registering the embeddings
     def register_embeddings(face_rgb, current_name):
         global recognizer, device
-        cv2.imshow("Face_Embedded", face_rgb)
-        cv2.waitKey(1)
+        from display import embedding_preview
+        state.embedding_preview=face_rgb.copy()
+        embedding_preview()
 
         face_resized = cv2.resize(face_rgb, (160, 160))
         face_tensor = torch.tensor(face_resized).permute(2, 0, 1).unsqueeze(0).float() / 255.0
@@ -104,28 +99,3 @@ class Face_Recognition:
                                     best_match = name
 
                         state.face_results[i] = {'name': best_match, 'similarity': best_score}
-
-    def save_embeddings(file_path="face_embeddings_3.pkl"):
-        clean_data = {}
-        for name, embeds in state.known_face_embeddings.items():
-            clean_data[name] = []
-            for e in embeds:
-                if torch.is_tensor(e):
-                    clean_data[name].append(e.detach().cpu().numpy())
-                else:
-                    clean_data[name].append(e)  
-
-        if os.path.exists(file_path):
-            with open(file_path, "rb") as f:
-                existing_data = pickle.load(f)
-        else:
-            existing_data = {}
-
-        for name, embeds in clean_data.items():
-            if name not in existing_data:
-                existing_data[name] = []
-            existing_data[name].extend(embeds)
-
-        with open(file_path, "wb") as f:
-            pickle.dump(existing_data, f)
-        print(f"💾 Embeddings updated and saved to {file_path}")

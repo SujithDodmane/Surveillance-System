@@ -1,8 +1,6 @@
-# state.py
-
 import threading
 
-#Global variables that can be used by both thread and loop 
+#Global variables that can be used by both threads and loops 
 faces = []
 faces_img = []
 faces_img_rgb = []
@@ -12,3 +10,5 @@ latest_frame = None
 thread_stop_flag = False
 lock = threading.Lock()
 key = None
+
+embedding_preview=None

@@ -5,10 +5,11 @@
 import cv2
 import time
 import state
-from embeddings_manager import register_embedding, save_embeddings
+from embeddings_manager import  save_embeddings
+import recognition
 
 def read_display(recognizer, device):
-    camera = cv2.VideoCapture(0)
+    camera = cv2.VideoCapture("http://192.168.0.166:4747/video")
     frame_count = 0
     start_time = time.time()
 
@@ -58,8 +59,9 @@ def read_display(recognizer, device):
         if key == ord('e'):
             #only one face should be there while registering the embeddings
             if len(state.faces_img_rgb) == 1:
-                register_embedding(state.faces_img_rgb[0], "Sujith", recognizer, device, state.known_face_embeddings)
+                recognition.Face_Recognition.register_embeddings(state.faces_img_rgb[0],"Sujith")
                 print("Face_Embedding_Function called")
+                embedding_preview()
             else:
                 print("⚠️ Make sure only one face is visible while pressing E")
 
@@ -74,3 +76,8 @@ def read_display(recognizer, device):
             break
 
     camera.release()
+
+
+def embedding_preview(): 
+    cv2.imshow("Face_Embedded",state.embedding_preview)
+    cv2.waitKey(1)

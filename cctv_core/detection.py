@@ -1,7 +1,4 @@
-# detection.py
 # Thread----> For detection 
-
-
 import cv2
 from facenet_pytorch import MTCNN
 
